@@ -21,8 +21,8 @@ class PhotoController extends AbstractActionController
         $flickr = new Flickr($config['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         $photoDetails = $flickr->getImageDetails($id);
+        $photoExif = $flickr->getPhotoExif($id);
         $photoInfo = $flickr->getImageInfoById($id);
-//         $photoExif = $flickr->getImageInfoById($id,'flickr.photos.getExif');
         
 //         $debug = new Debug();
 //                                             $debug->dump($photoExif);
@@ -30,6 +30,7 @@ class PhotoController extends AbstractActionController
         return array(
             'photoInfo'    => $photoInfo,
             'photoDetails' => $photoDetails,
+            'photoExif'    => $photoExif,
         );
     }
 }

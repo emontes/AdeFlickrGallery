@@ -36,10 +36,16 @@
               <ul class="slides">
                 <li class="ef-slide">
                   <ul>
-                    <li><strong>Camera:</strong> Nikon D90</li>
-                    <li><strong>Software:</strong> Adobe Photoshop CS3 Mac OS</li>
-                    <li><strong>DateTime:</strong> 2013:05:09 12:03:06</li>
-                    <li><strong>Longitude:</strong> 2,11,15.781005859375, <strong>latitude:</strong> 53,0,49.283935546875</li>
+                    <?php $i=0?>
+                    <?php foreach ($this->photoExif as $key=>$value):?>
+                    <li><strong><?php echo $key?>:</strong> <?php echo $value?></li>
+                    <?php
+                       $i++;
+                       if ($i > 6) {
+                           break;
+                       } 
+                    ?>
+                    <?php endforeach;?>
                   </ul>
                 </li>
 
