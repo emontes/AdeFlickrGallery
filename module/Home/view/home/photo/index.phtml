@@ -1,5 +1,19 @@
 <?php 
-// Zend\Debug\Debug::dump($this->photoDetails);die();
+ $this->headtitle($this->photoInfo['title']);
+ if ($this->photoInfo['description'] == '') {
+     $descripcion = 'Detalles de la Fotograf’a ' . $this->photoInfo['title'];
+ } else {
+     $descripcion = $this->photoInfo['description'];
+ }
+ $this->headmeta()->appendName('description', substr(strip_tags($descripcion),0,150));
+ $tags = preg_split('/\s+/', $this->photoInfo['tags']);
+ $keywords = 'foto';
+ foreach ($tags as $tag) {
+     if ($tag <> '') {
+         $keywords = $keywords . ', ' . $tag;
+     }
+ }
+ $this->headmeta()->appendName('keywords', $keywords);
 ?>
 <section id="ef-page" class="ef-has-sidebar">
 
@@ -82,9 +96,7 @@
             <p><?php echo $this->photoInfo['description']?></p>
             
             <?php if ($this->photoInfo['tags'] <> ''):?>
-            <?php 
-            $tags = preg_split('/\s+/', $this->photoInfo['tags']);
-            ?>
+            
             <?php // \Zend\Debug\Debug::dump($matches)?>
             <div class="tagcloud ef-posted-in">
               <ul class="wp-tag-cloud">
