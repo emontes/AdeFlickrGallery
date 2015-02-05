@@ -18,3 +18,8 @@ temp/
 # Legacy ZF1
 demos/
 extras/documentation
+
+.settings
+.buildpath
+.project
+.DS_Store

@@ -1,0 +1,31 @@
+<section id="ef-page">
+
+  <div class="ef-featured-img">
+    <div id="ef-gallery-outer">
+      <div id="ef-gallery-info-pane">
+        <span id="ef-counter"></span>
+        <span id="ef-gallery-title"></span>
+      </div>
+      <div id="ef-gallery-wrapper">
+        <div id="ef-gallery" class="clearfix">
+          <ul class="slides clearfix">
+            <?php foreach ($this->collections as $collection):?>
+            <li class="ef-slide">
+              <div class="ef-gal-img"><a href="#">
+              <img src="<?php echo $collection->getAttribute('iconlarge')?>" 
+                   title="<?php echo $collection->getAttribute('title')?>"
+                    alt="" /></a>
+              </div>
+            </li>
+            <?php endforeach;?>
+            
+            
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+

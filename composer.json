@@ -1,0 +1,12 @@
+{
+  "name" : "PueblaPictures.com",
+  "description" : "Puebla Photo Gallery",
+  "require" : {
+    "php" : ">=5.3.3",
+    "zendframework/zendframework" : "2.3.*",
+    "zendframework/zendservice-flickr" : "2.0.*"
+  },
+  "keywords" : [ "framework", "zf2" ],
+  "license" : "BSD-3-Clause",
+  "homepage" : "http://framework.zend.com/"
+}

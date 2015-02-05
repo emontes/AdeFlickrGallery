@@ -1,0 +1,86 @@
+<?php echo $this->doctype();?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('PueblaPictures')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/assets/favicon.png'))
+                        ->appendStylesheet('http://fonts.googleapis.com/css?family=Magra:400,700|Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic&amp;subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic')
+                        ->appendStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                        ->appendStylesheet($this->basePath() . '/css/topbar.min.css')
+                        ->appendStylesheet($this->basePath() . '/css/shortcodes.css') 
+                        
+                        ->appendStylesheet($this->basePath() . '/inc/fontello/css/fontello.css')
+                        ->appendStylesheet($this->basePath() . '/inc/fontello/css/animation.css')
+                        ->appendStylesheet($this->basePath() . '/css/shadowbox/shadowbox.css')
+                        ->appendStylesheet($this->basePath() . '/css/style.css')
+                        ->appendStylesheet($this->basePath() . '/css/colors.css')
+        ?>
+
+        <!-- Scripts -->
+        <?php // echo $this->headScript()
+//             ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+//             ->prependFile($this->basePath() . '/js/jquery.min.js')
+//             ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+//             ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+//         ; ?>
+    <script type="text/javascript" src="/js/modernizr.custom.js"></script>
+    <script type="text/javascript" data-pace-options='{ "eventLag": false }' src="/js/pace.min.js"></script>
+
+    <!--[if lt IE 9]>
+      <link href="css/ie.css" rel="stylesheet">
+      <script src="js/ie/html5shiv.js"></script>
+      <script src="js/ie/respond.min.js"></script>
+    <![endif]-->
+    </head>
+    <body class="fireform-slider page-template-templateshome-template ef-overlay">
+<!--     <body class="fireform-slider page-template-templateshome-template ef-fullwidth-page ef-overlay"> -->
+<!--     <body class="page-template-templatesportfolio-template ef-fullwidth-page ef-has-widgets"> -->
+    <?php echo $this->partial('partial/top-bar')?>   
+    <section id="ef-page-header">
+      <div id="ef-head-inner">
+        <div id="ef-page-controls"></div>
+      </div>
+    </section>
+    
+    
+    <section id="ef-page"></section>
+
+    <figure id="slide_desc"></figure>
+      
+            <?php echo $this->content; ?>
+      
+        <?php echo $this->partial('partial/footer')?>
+
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>
+
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="/js/detectmobilebrowser.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.transit.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/foundation.min.js"></script>
+    <script type="text/javascript" src="/js/topbar.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="/js/imagesloaded.min.js"></script>
+    <script type="text/javascript" src="/js/video/video.min.js"></script>
+    <script type="text/javascript" src="/js/video/bigvideo.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.infinitescroll.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="/js/shortcodes/inview.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
+    <script type="text/javascript" src="/js/shadowbox/shadowbox.js"></script>
+    <script type="text/javascript" src="/js/shortcodes/custom.js"></script>
+    <script type="text/javascript" src="/js/setup.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>

@@ -1,0 +1,62 @@
+<?php 
+$this->headtitle($this->pageTitle);
+$this->headmeta()->appendName('description', substr(strip_tags($this->groupInfo['description']),0,150) );
+?>
+
+<?php echo $this->partial('/grupos/index/_page_header', array(
+    'pageTitle' => $this->pageTitle,
+    'groupInfo' => $this->groupInfo,
+))?>
+
+<section id="ef-page">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Adaptable Grafico -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5136877882943908"
+         data-ad-slot="9139977472"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+      <div class="ef-page-inner">
+        <div class="ef-portfolio infinite-scrolling ef-isotope">
+        
+        <?php foreach ($this->fotos as $foto):?>
+          <div class="ef-post category-1 category-4">
+            <div class="ef-post-inner">
+              <div class="ef-proj-img">
+              
+                <ul class="ef-fadeshow" data-interval="3000">
+                  <li><img src="<?php echo $foto['image1']?>" alt="Project name"></li>
+                  <li><img src="<?php echo $foto['image2']?>" alt="Project name"></li>
+                  <li><img src="<?php echo $foto['image3']?>" alt="Project name"></li>
+                </ul>
+
+                <div class="ef-proj-desc">
+                  <h4><?php echo $foto['title']?></h4>
+                  <div class="ef-links-holder">
+                    <a class="ef-lnk icn-ef" href="/photo-<?php echo $foto['id']?>">Detalles</a>
+                    <a class="ef-lightbox icn-ef" 
+                       title="<?php echo $foto['title']?>" 
+                       href="<?php echo $foto['largeImg']?>" 
+                       data-sbrel="portfolio-group">Agrandar</a>
+                  </div>
+                </div>
+               
+
+              </div>
+            </div>
+          </div>
+        <?php endforeach;?>
+
+         
+
+        </div>
+        <nav id="ef-page_nav">
+          <a href="/grupos/<?php echo $this->id?>/pag/<?php echo $this->page + 1?>"></a>
+        </nav>
+      </div>
+
+    </section>
