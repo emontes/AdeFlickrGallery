@@ -15,14 +15,15 @@ class PhotoController extends AbstractActionController
         
         $id = $this->params()->fromRoute('id');
         if (!$id) {
-            $id = 'turistapuebla';
+            $id = '5964609109';
         }
+        $photoService = $this->getServiceLocator()->get('photo-service');
         
         $flickr = new Flickr($config['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-        $photoDetails = $flickr->getImageDetails($id);
-        $photoExif = $flickr->getPhotoExif($id);
-        $photoInfo = $flickr->getImageInfoById($id);
+        $photoDetails = $photoService->getPhotoDetails($flickr, $id); //$flickr->getImageDetails($id);
+        $photoExif = $photoService->getPhotoExif($flickr, $id);
+        $photoInfo = $photoService->getPhotoInfo($flickr, $id);
         
 //         $debug = new Debug();
 //                                             $debug->dump($photoExif);

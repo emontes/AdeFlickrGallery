@@ -37,6 +37,11 @@ return array(
             
         ),
     ),
+    'service_manager' => array(
+        'invokables' => array(
+            'photo-service' => 'Home\Service\PhotoService',
+        )
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
             'Home' => __DIR__ . '/../view',
