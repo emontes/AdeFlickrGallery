@@ -3,7 +3,7 @@ namespace Home\Service;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Debug\Debug;
+use ZendService\Flickr\Exception\ExceptionInterface as FlickrException;
 
 class PhotoService implements ServiceLocatorAwareInterface
 {
@@ -25,7 +25,12 @@ class PhotoService implements ServiceLocatorAwareInterface
         $photoDetails = $cache->getItem($cacheId, $success);
         if (!$success) {
             $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-            $photoDetails = $flickr->getImageDetails($id);
+            try {
+                $photoDetails = $flickr->getImageDetails($id);
+            } catch (FlickrException $e) {
+                $photoDetails = array('Error'=> $e->getMessage());
+            }
+            
             $cache->setItem($cacheId, $photoDetails);
         }
         return $photoDetails;
@@ -38,7 +43,11 @@ class PhotoService implements ServiceLocatorAwareInterface
         $photoExif = $cache->getItem($cacheId, $success);
         if (!$success) {
             $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-            $photoExif = $flickr->getPhotoExif($id);
+              try {
+                  $photoExif = $flickr->getPhotoExif($id);
+              } catch (FlickrException $e) {
+                  $photoExif = array('error' => $e->getMessage());
+              }
             $cache->setItem($cacheId, $photoExif);
         }
         return $photoExif;
@@ -51,7 +60,12 @@ class PhotoService implements ServiceLocatorAwareInterface
         $photoInfo = $cache->getItem($cacheId, $success);
         if (!$success) {
             $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-            $photoInfo = $flickr->getImageInfoById($id);
+            try {
+                $photoInfo = $flickr->getImageInfoById($id);
+            } catch (FlickrException $e) {
+                $photoInfo = array('Error' => $e->getMessage());
+            }
+            
             $cache->setItem($cacheId, $photoInfo);
         }
         return $photoInfo;

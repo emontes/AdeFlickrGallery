@@ -1,7 +1,18 @@
-<h1><?php echo $this->translate('An error occurred') ?></h1>
-<h2><?php echo $this->message ?></h2>
+<section id="ef-page">
+
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3><?php echo $this->translate('An error occurred') ?></h3>
+  </div>
+  <div class="panel-body">
+    <?php echo $this->message; echo $this->display_exceptions ?>
+  </div>
+</div>
+
 
 <?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
+
 
 <?php if(isset($this->exception) && $this->exception instanceof Exception): ?>
 <hr/>
@@ -60,3 +71,4 @@
 <?php endif ?>
 
 <?php endif ?>
+</section>
