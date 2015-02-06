@@ -1,12 +1,13 @@
 <?php 
- $this->headtitle($this->photoInfo['title'] . ' (' . $this->photo_id .')');
- if ($this->photoInfo['description'] == '') {
-     $descripcion = 'Detalles de la Fotograf’a ' . $this->photoInfo['title'];
+//Zend\Debug\Debug::dump($this->photos[0]);
+ $this->headtitle($this->photos[0]['info']['title'] . ' (' . $this->photos[0]['id'] .')');
+ if ($this->photos[0]['info']['description'] == '') {
+     $descripcion = 'Detalles de la FotografÃ­a ' . $this->photos[0]['info']['title'];
  } else {
-     $descripcion = $this->photoInfo['description'];
+     $descripcion = $this->photos[0]['info']['description'];
  }
  $this->headmeta()->appendName('description', substr(strip_tags($descripcion),0,150));
- $tags = preg_split('/\s+/', $this->photoInfo['tags']);
+ $tags = preg_split('/\s+/', $this->photos[0]['info']['tags']);
  $keywords = 'foto';
  foreach ($tags as $tag) {
      if ($tag <> '') {
@@ -22,13 +23,9 @@
 
           <div class="ef-post-carousel clearfix">
             <ul class="slides">
-              <li class="ef-slide"><img src="<?php echo $this->photoDetails['Medium 800']->uri?>" alt=""></li>
-              <?php if (isset($this->photoDetails2)):?>
-              <li class="ef-slide"><img src="<?php echo $this->photoDetails2['Medium 800']->uri?>" alt=""></li>
-              <?php endif?>
-               <?php if (isset($this->photoDetails3)):?>
-              <li class="ef-slide"><img src="<?php echo $this->photoDetails3['Medium 800']->uri?>" alt=""></li>
-              <?php endif?>
+              <?php foreach ($this->photos as $photo):?>
+                <li class="ef-slide"><img src="<?php echo $photo['details']['Medium 800']->uri?>" alt=""></li>
+              <?php endforeach;?>
 <!--               <li class="ef-slide"><img src="assets/content/img_768x512.jpg" alt=""></li> -->
 <!--               <li class="ef-slide"><img src="assets/content/img_768x512-1.jpg" alt=""></li> -->
             </ul>
@@ -54,10 +51,11 @@
             <div id="ef-exif-slider" class="clearfix">
 
               <ul class="slides">
+                <?php foreach ($this->photos as $photo):?>
                 <li class="ef-slide">
                   <ul>
                     <?php $i=0?>
-                    <?php foreach ($this->photoExif as $key=>$value):?>
+                    <?php foreach ($photo['exif'] as $key=>$value):?>
                     <li><strong><?php echo $key?>:</strong> <?php echo $value?></li>
                     <?php
                        $i++;
@@ -68,42 +66,7 @@
                     <?php endforeach;?>
                   </ul>
                 </li>
-
-                <?php if(isset($this->photoExif2)):?>
-                <li class="ef-slide">
-                  <ul>
-                    <?php $i=0?>
-                    <?php foreach ($this->photoExif2 as $key=>$value):?>
-                    <li><strong><?php echo $key?>:</strong> <?php echo $value?></li>
-                    <?php
-                       $i++;
-                       if ($i > 6) {
-                           break;
-                       } 
-                    ?>
-                    <?php endforeach;?>
-                  </ul>
-                </li>
-                <?php endif;?>
-                
-                <?php if(isset($this->photoExif3)):?>
-                <li class="ef-slide">
-                  <ul>
-                    <?php $i=0?>
-                    <?php foreach ($this->photoExif3 as $key=>$value):?>
-                    <li><strong><?php echo $key?>:</strong> <?php echo $value?></li>
-                    <?php
-                       $i++;
-                       if ($i > 6) {
-                           break;
-                       } 
-                    ?>
-                    <?php endforeach;?>
-                  </ul>
-                </li>
-                <?php endif;?>
-
-                
+                <?php endforeach;?>
               </ul>
             </div>
           </div>
@@ -115,11 +78,11 @@
 
             <small class="ef-post-info">Category: <a href="#">Fashion</a></small>
 
-            <h3><?php echo $this->photoInfo['title']?></h3>
+            <h3><?php echo $this->photos[0]['info']['title']?></h3>
 
-            <p><?php echo $this->photoInfo['description']?></p>
+            <p><?php echo $this->photos[0]['info']['description']?></p>
             
-            <?php if ($this->photoInfo['tags'] <> ''):?>
+            <?php if ($this->photos[0]['info']['tags'] <> ''):?>
             
             <?php // \Zend\Debug\Debug::dump($matches)?>
             <div class="tagcloud ef-posted-in">
@@ -134,7 +97,7 @@
             </div>
             <?php endif;?>
             <button type="button" class="btn ef-hollow-btn btn-primary btn-xs">
-            <a href="<?php echo $this->photoDetails['Medium 800']->clickUri?>">Abrir en Flickr</a>
+            <a href="<?php echo $this->photos[0]['info']['urls']?>">Abrir en Flickr</a>
             </button>  
           </div>
         </div>
