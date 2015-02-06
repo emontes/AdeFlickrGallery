@@ -24,7 +24,7 @@ return array(
                 'options' => array(
                     'route'    => '/photo[-:id]',
                     'constraints' => array(
-                        'id'     => '[0-9]+'
+                        //'id'     => '[0-9+]'
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Home\Controller',

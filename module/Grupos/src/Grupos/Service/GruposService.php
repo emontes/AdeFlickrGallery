@@ -32,7 +32,7 @@ class GruposService implements ServiceLocatorAwareInterface
         return $groupInfo;
     }
     
-    public function getFotos($flickr, $id, $groupId, $page)
+    public function getFotosTrio($flickr, $id, $groupId, $page)
     {
         $cache = $this->getServiceLocator()->get('filesystem');
         $cacheId = 'grupoFotos-' . $id . '-pag-' . $page;
@@ -71,6 +71,8 @@ class GruposService implements ServiceLocatorAwareInterface
                     }
                     $fotos[] = array(
                         'id'       => $result->id,
+                        'id2'      => '',
+                        'id3'      => '',
                         'image1'   => $result->Medium->uri,
                         'image2'   => '',
                         'image3'   => '',
@@ -85,7 +87,8 @@ class GruposService implements ServiceLocatorAwareInterface
             $x1 = $perPage -1;
             $x2 = $perPage -2;
             for ($i = 0; $i<($perPage); $i++) {
-                 
+                $fotos[$i]['id2'] = $fotos[$x1]['id'];
+                $fotos[$i]['id3'] = $fotos[$x2]['id'];
                 $fotos[$i]['image2'] = $fotos[$x1]['image1'];
                 $fotos[$i]['image3'] = $fotos[$x2]['image1'];
                 $x1 = $x1 - 1;

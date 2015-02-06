@@ -36,7 +36,7 @@ class IndexController extends AbstractActionController
         
         $gruposService = $this->getServiceLocator()->get('grupos-service');
         $groupInfo = $gruposService->getGroupInfo($flickr, $groupId);
-        $fotos = $gruposService->getFotos($flickr,$id, $groupId, $page);
+        $fotos = $gruposService->getFotosTrio($flickr,$id, $groupId, $page);
         
         
         $pageTitle = 'Grupo: ' . $config['groups'][$id]['title'];
