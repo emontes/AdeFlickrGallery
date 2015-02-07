@@ -1,11 +1,21 @@
 <?php 
 $this->headtitle($this->pageTitle);
 $this->headmeta()->appendName('description', substr(strip_tags($this->groupInfo['description']),0,150) );
+$keywords = 'fotos';
+foreach ($this->categorias as $categoria) {
+    if ($categoria <> '') {
+        $keywords = $keywords . ', ' . $categoria;
+    }
+}
+$this->headmeta()->appendName('keywords', $keywords);
+
 ?>
 
 <?php echo $this->partial('/grupos/index/_page_header', array(
-    'pageTitle' => $this->pageTitle,
-    'groupInfo' => $this->groupInfo,
+    'pageTitle'  => $this->pageTitle,
+    'groupInfo'  => $this->groupInfo,
+    'tags'       => $this->tags,
+    'categorias' => $this->categorias,
 ))?>
 
 <section id="ef-page">
@@ -24,7 +34,15 @@ $this->headmeta()->appendName('description', substr(strip_tags($this->groupInfo[
         <div class="ef-portfolio infinite-scrolling ef-isotope">
         
         <?php foreach ($this->fotos as $foto):?>
-          <div class="ef-post category-1 category-4">
+          <?php 
+          $categories = '';
+          $categoriesArray = explode('-', $this->fotosConCategoria[$foto['id']]);
+          foreach ($categoriesArray as $fcc){
+             
+            $categories .= 'category-' . $fcc . ' ';    
+          }
+          ?>
+          <div class="ef-post <?php echo $categories?>">
             <div class="ef-post-inner">
               <div class="ef-proj-img">
               

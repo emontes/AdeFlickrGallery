@@ -35,8 +35,19 @@ class IndexController extends AbstractActionController
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         
         $gruposService = $this->getServiceLocator()->get('grupos-service');
-        $groupInfo = $gruposService->getGroupInfo($flickr, $groupId);
-        $fotos = $gruposService->getFotosTrio($flickr,$id, $groupId, $page);
+        
+        $groupInfo = $gruposService->getGroupInfo($groupId);
+        $fotos = $gruposService->getFotos($flickr,$groupId, $page);
+        $groupTags = $gruposService->getGroupTags($flickr, $fotos);
+        $tags = $groupTags[0];
+        $fotosConTags = $groupTags[1];
+        
+        
+        $categorias = $gruposService->getGroupCategories($tags);
+        $fotosConCategoria = $gruposService->getPhotosCategories($fotosConTags, $categorias); 
+        //\Zend\Debug\Debug::dump($fotosConCategoria,'fotos',true);die();
+        $fotos = $gruposService->makeFotosTrio($fotos);
+       
         
         
         $pageTitle = 'Grupo: ' . $config['groups'][$id]['title'];
@@ -45,10 +56,13 @@ class IndexController extends AbstractActionController
         }
         return array(
             'fotos' => $fotos,
-            'id'   => $id,
-            'page' => $page,
-            'pageTitle' => $pageTitle,
-            'groupInfo' => $groupInfo,
+            'id'         => $id,
+            'page'       => $page,
+            'pageTitle'  => $pageTitle,
+            'groupInfo'  => $groupInfo,
+            'tags'       => $tags,
+            'categorias' => $categorias,
+            'fotosConCategoria' => $fotosConCategoria,
         );
     }
     
