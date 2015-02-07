@@ -80,7 +80,7 @@ class GruposService implements ServiceLocatorAwareInterface
                         if (isset($result->Large)){
                             $largeImg = $result->Large->uri;
                         } else {
-                            $largeImg = '';
+                            $largeImg = $result->Medium->uri;
                         }
                         $fotos[] = array(
                             'id'       => $result->id,
