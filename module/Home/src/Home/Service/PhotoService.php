@@ -1,26 +1,32 @@
 <?php
 namespace Home\Service;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use ZendService\Flickr\Exception\ExceptionInterface as FlickrException;
+use Zend\Cache\StorageFactory;
 
-class PhotoService implements ServiceLocatorAwareInterface
+class PhotoService 
 {
-    protected $serviceLocator;
     
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
+    private function getCache($cacheDir='data/cache', $ttl=604800) {
+        return StorageFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'cache_dir' => $cacheDir,
+                    'ttl' => $ttl,
+                ),
+            ),
+            'plugins' => array(
+                'exception_handler' => array('throw_exceptions' => false),
+                'serializer',
+            ),
+        ));
     }
     
-    public function getServiceLocator() {
-        return $this->serviceLocator;
-    }
-    
-    public function getPhotoDetails($flickr, $id)
+    public function getPhotoDetails($flickr, $id, $cacheDir = 'data/cache')
     {
-        $cache = $this->getServiceLocator()->get('filesystem');
+        //$cache = $this->getServiceLocator()->get('filesystem');
+        $cache = $this->getCache($cacheDir);
         $cacheId = 'photoDetails-'. $id;
         $photoDetails = $cache->getItem($cacheId, $success);
         if (!$success) {
@@ -36,9 +42,9 @@ class PhotoService implements ServiceLocatorAwareInterface
         return $photoDetails;
     }
     
-    public function getPhotoExif($flickr, $id)
+    public function getPhotoExif($flickr, $id, $cacheDir = 'data/cache')
     {
-        $cache = $this->getServiceLocator()->get('filesystem');
+        $cache = $this->getCache($cacheDir);
         $cacheId = 'photoExif-'. $id;
         $photoExif = $cache->getItem($cacheId, $success);
         if (!$success) {
@@ -53,9 +59,9 @@ class PhotoService implements ServiceLocatorAwareInterface
         return $photoExif;
     }
     
-    public function getPhotoInfo($flickr, $id)
+    public function getPhotoInfo($flickr, $id, $cacheDir = 'data/cache')
     {
-        $cache = $this->getServiceLocator()->get('filesystem');
+        $cache = $this->getCache($cacheDir);
         $cacheId = 'photoInfo-'. $id;
         $photoInfo = $cache->getItem($cacheId, $success);
         if (!$success) {

@@ -26,11 +26,11 @@
               <?php foreach ($this->photos as $photo):?>
                 <?php
                   $imageUri = $photo['details']['Medium 800']->uri;
-                  $size = getimagesize($imageUri);
-                  if ($size[1] > 600) {
+                  $size = $photo['details']['Medium 800']->height;
+                  if ($size > 600) {
                       $imageUri = $photo['details']['Medium 640']->uri;
-                      $size2 = getimagesize($imageUri);
-                      if ($size2[1] > 600) {
+                      $size2 = $photo['details']['Medium 640']->height;
+                      if ($size2 > 600) {
                           $imageUri = $photo['details']['Medium']->uri;
                       }
                   }

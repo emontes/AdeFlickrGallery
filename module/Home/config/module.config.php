@@ -40,7 +40,13 @@ return array(
     'service_manager' => array(
         'invokables' => array(
             'photo-service' => 'Home\Service\PhotoService',
-        )
+        ),
+        'factories' => array(
+        ),
+        'aliases' => array(
+        ),
+        'initializers' => array(
+        ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(

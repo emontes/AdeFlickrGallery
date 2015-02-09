@@ -14,6 +14,9 @@ class GruposServiceTest extends AbstractControllerTestCase
      * @var GruposService
      */
     private $GruposService;
+    private $flickr;
+    private $config;
+    private $cacheDir;
 
     /**
      * Prepares the environment before running a test.
@@ -25,6 +28,17 @@ class GruposServiceTest extends AbstractControllerTestCase
         $this->setApplicationConfig(
             include '/paginas/pueblapictures.com/config/application.config.php'
         );
+        
+        $config = include '/paginas/pueblapictures.com/config/autoload/flickr.local.php';
+        $this->config = $config;
+        
+        $key     = $config['flickr']['key'];
+        
+        $flickr = new Flickr($key);
+        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
+        $this->flickr = $flickr;
+        
+        $this->cacheDir = '/paginas/pueblapictures.com/data/cache';
         $this->GruposService = new GruposService();
     }
 
@@ -33,9 +47,16 @@ class GruposServiceTest extends AbstractControllerTestCase
      */
     protected function tearDown()
     {
+        
         $this->GruposService = null;
         
         parent::tearDown();
+    }
+    
+    public function testGetGroupInfo() 
+    {
+        $groupId = $this->config['flickr']['groups']['turistapuebla']['id'];
+        $this->GruposService->getGroupInfo($this->flickr, $groupId, $this->cacheDir);
     }
   
 
@@ -44,13 +65,8 @@ class GruposServiceTest extends AbstractControllerTestCase
      */
     public function testGetFotos()
     {
-        $config = include '/paginas/pueblapictures.com/config/autoload/flickr.local.php';
-        $key     = $config['flickr']['key'];
-        $groupId = $config['flickr']['groups']['turistapuebla']['id'];
-        $flickr = new Flickr($key);
-        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-        $this->GruposService->getFotos($flickr, $groupId, 1 , 20);
-        
+        $groupId = $this->config['flickr']['groups']['turistapuebla']['id'];
+        $this->GruposService->getFotos($this->flickr, $groupId, 1 , 3, $this->cacheDir);
     }
 
     /**

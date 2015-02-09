@@ -14,12 +14,9 @@ return array(
             './module',
             './vendor','./module','./module',
         ),
-
-        
         'config_glob_paths' => array(
             'config/autoload/{,*.}{global,local}.php',
         ),
-        
     ),
     
     

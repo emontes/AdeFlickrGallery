@@ -6,13 +6,13 @@ use ZendService\Flickr\Exception\ExceptionInterface as FlickrException;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Cache\StorageFactory;
 
 
 class GruposService implements ServiceLocatorAwareInterface
 {
-    protected $serviceLocator;
-    protected $flickr;
-   
+    public $serviceLocator;
+    public $flickr;
     
     
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
@@ -28,34 +28,40 @@ class GruposService implements ServiceLocatorAwareInterface
         return $this->getServiceLocator()->get('Config');
     }
     
-    public function getFlickr() {
-        $config = $this->getConfig();
-        $flickr = new Flickr($config['flickr']['key']);
-        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-        return $flickr;
-        
+    private function getCache($cacheDir='data/cache', $ttl=604800) {
+        return StorageFactory::factory(array(
+                        'adapter' => array(
+                            'name' => 'filesystem',
+                            'options' => array(
+                                'cache_dir' => $cacheDir,
+                                'ttl' => $ttl,
+                            ),
+                        ),
+                        'plugins' => array(
+                            'exception_handler' => array('throw_exceptions' => false),
+                            'serializer',
+                        ),
+                    ));
     }
     
-    public function getGroupInfo($groupId)
+    public function getGroupInfo($flickr, $groupId, $cacheDir='data/cache')
     {
         
-        $cache = $this->getServiceLocator()->get('filesystem');
+        $cache = $this->getCache($cacheDir);
         $normalizedGroupId = str_replace('@', 'at', $groupId);
         $cacheId = 'grupoInfo-' . $normalizedGroupId;
         $groupInfo = $cache->getItem($cacheId, $success);
         if (!$success) {
-            $flickr = $this->getFlickr();
             $groupInfo = $flickr->getGroupInfo($groupId);
-
             $cache->setItem($cacheId, $groupInfo);
         }
         return $groupInfo;
     }
     
-    public function getFotos($flickr, $groupId, $page, $perPage = 20)
+    public function getFotos($flickr, $groupId, $page, $perPage = 20, $cacheDir='data/cache')
     {
         $normalizedGroupId = str_replace('@', 'at', $groupId);
-        $cache = $this->getServiceLocator()->get('filesystem');
+        $cache = $this->getCache($cacheDir); // se pone para hacerlo testeable 
         $cacheId = 'grupoFotos-' . $normalizedGroupId . '-pag-' . $page;
         $fotos = $cache->getItem($cacheId, $success);
         if (!$success) {
