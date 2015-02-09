@@ -12,7 +12,7 @@ return array(
     'module_listener_options' => array(
         'module_paths' => array(
             './module',
-            './vendor',
+            './vendor','./module','./module',
         ),
 
         
@@ -21,6 +21,8 @@ return array(
         ),
         
     ),
+    
+    
 
     
 );

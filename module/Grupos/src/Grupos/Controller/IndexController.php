@@ -16,22 +16,23 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $config = $this->layout()->configFlickr;
         
+        $config = $this->getServiceLocator()->get('config');
+        $configFlickr = $config['flickr'];
         
         $id = $this->params()->fromRoute('id');
         if (!$id) {
             $id = 'turistapuebla';
         }
-        $groupId = $config['groups'][$id]['id'];
+        $groupId = $configFlickr['groups'][$id]['id'];
         
         $page = (int) $this->params()->fromRoute('page');
         if (!$page) {
             $page = 1;
         }
+       
         
-        
-        $flickr = new Flickr($config['key']);
+        $flickr = new Flickr($configFlickr['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         
         $gruposService = $this->getServiceLocator()->get('grupos-service');
@@ -50,7 +51,7 @@ class IndexController extends AbstractActionController
        
         
         
-        $pageTitle = 'Grupo: ' . $config['groups'][$id]['title'];
+        $pageTitle = 'Grupo: ' . $configFlickr['groups'][$id]['title'];
         if ($page > 1) {
             $pageTitle .= ' - Pag. ' . $page;
         }

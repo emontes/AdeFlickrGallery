@@ -1,16 +1,18 @@
 <?php
 namespace Grupos\Service;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use ZendService\Flickr\Flickr;
 use ZendService\Flickr\Exception\ExceptionInterface as FlickrException;
-use Zend\Debug\Debug;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
 
 class GruposService implements ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
     protected $flickr;
+   
     
     
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
