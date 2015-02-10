@@ -39,7 +39,6 @@ return array(
     ),
     'service_manager' => array(
         'invokables' => array(
-            'photo-service' => 'Home\Service\PhotoService',
         ),
         'factories' => array(
         ),

@@ -56,7 +56,11 @@ class GruposServiceTest extends AbstractControllerTestCase
     public function testGetGroupInfo() 
     {
         $groupId = $this->config['flickr']['groups']['turistapuebla']['id'];
-        $this->GruposService->getGroupInfo($this->flickr, $groupId, $this->cacheDir);
+        $groupInfo = $this->GruposService->getGroupInfo($this->flickr, $groupId, $this->cacheDir);
+        $this->assertArrayHasKey('name', $groupInfo);
+        $this->assertArrayHasKey('description', $groupInfo);
+        $this->assertArrayHasKey('members', $groupInfo);
+        $this->assertArrayHasKey('pool_count', $groupInfo);
     }
   
 

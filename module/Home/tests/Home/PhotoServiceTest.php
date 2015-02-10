@@ -51,6 +51,6 @@ class PhotoServiceTest extends AbstractControllerTestCase
                 'exif'    => $this->photoService->getPhotoExif($this->flickr, $id, $this->cacheDir),
             );
         }
-        echo '';
+        //$this->assertArrayHasKey('details', $photos);
     }
 }

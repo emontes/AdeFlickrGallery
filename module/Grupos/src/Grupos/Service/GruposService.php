@@ -1,33 +1,14 @@
 <?php
 namespace Grupos\Service;
 
-use ZendService\Flickr\Flickr;
+use Home\Service\PhotoService;
 use ZendService\Flickr\Exception\ExceptionInterface as FlickrException;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Cache\StorageFactory;
 
 
-class GruposService implements ServiceLocatorAwareInterface
+class GruposService
 {
-    public $serviceLocator;
-    public $flickr;
-    
-    
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
-    
-    public function getServiceLocator() {
-        return $this->serviceLocator;
-    }
-    
-    public function getConfig() {
-        return $this->getServiceLocator()->get('Config');
-    }
-    
     private function getCache($cacheDir='data/cache', $ttl=604800) {
         return StorageFactory::factory(array(
                         'adapter' => array(
@@ -112,7 +93,7 @@ class GruposService implements ServiceLocatorAwareInterface
     
     public function getGroupTags($flickr, $fotos)
     {
-        $fotoService = $this->getServiceLocator()->get('photo-service');
+        $fotoService = new PhotoService();
         $tagsString = '';
         $fotosConTag = array();
         foreach ($fotos as $foto) {

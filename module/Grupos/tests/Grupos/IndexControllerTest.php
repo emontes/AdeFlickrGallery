@@ -1,5 +1,6 @@
 <?php
 use Grupos\Controller\IndexController;
+use Grupos\Service\GruposService;
 use ZendService\Flickr\Flickr;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
@@ -9,6 +10,13 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
  */
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
+    
+    private $indexController;
+    private $gruposService;
+    private $config;
+    private $flickr;
+    private $cacheDir;
+    
     /**
      * Prepares the environment before running a test.
      */
@@ -19,38 +27,37 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->setApplicationConfig(
             include '/paginas/pueblapictures.com/config/application.config.php'
         );
-//         $this->IndexController = new IndexController(/* parameters */);
-
-    }
-    
-    public function testGetServiceLocator()
-    {
-        $sm = $this->getApplicationServiceLocator();
         
-        $config = $sm->get('config');
-        $this->assertArrayHasKey('router',$config);
+        $this->config = include '/paginas/pueblapictures.com/config/autoload/flickr.local.php';
+        $key     = $this->config['flickr']['key'];
+        
+        $flickr = new Flickr($key);
+        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
+        $this->flickr = $flickr;
+        
+        $this->cacheDir = '/paginas/pueblapictures.com/data/cache';
+        
+        $this->IndexController = new IndexController();
+        $this->gruposService = new GruposService();
+
     }
     
     public function testGetGroupInfo()
     {
-        $config = include '/paginas/pueblapictures.com/config/autoload/flickr.local.php';
-        $key     = $config['flickr']['key'];
-        $groupId = $config['flickr']['groups']['turistapuebla']['id'];
-        $flickr = new Flickr($key);
-        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-        $groupInfo = $flickr->getGroupInfo($groupId);
+        $groupId = $this->config['flickr']['groups']['turistapuebla']['id'];
+        $groupInfo = $this->flickr->getGroupInfo($groupId);
         $this->assertArrayHasKey('name', $groupInfo);
+        $this->assertArrayHasKey('pool_count', $groupInfo);
+        $perPage = 20;
+        $pages = floor($groupInfo['pool_count'] / 20);
+        $this->assertGreaterThan(1, $pages);
     }
     
     public function testGetGroupPoolGetPhotos()
     {
-        $config = include '/paginas/pueblapictures.com/config/autoload/flickr.local.php';
-        $key     = $config['flickr']['key'];
-        $groupId = $config['flickr']['groups']['turistapuebla']['id'];
-        $flickr = new Flickr($key);
-        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
-        $groupPhotos = $flickr->groupPoolGetPhotos($groupId, array('page' => 1, 'per_page' => 20));
-        $this->assertAttributeGreaterThan(2, 'totalResultsAvailable', $groupPhotos);
+        $groupId = $this->config['flickr']['groups']['turistapuebla']['id'];
+        $groupPhotos = $this->gruposService->getFotos($this->flickr, $groupId, 1, 2, $this->cacheDir);
+        $this->assertArrayHasKey(0, $groupPhotos);
     }
 
     

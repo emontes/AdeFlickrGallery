@@ -2,9 +2,9 @@
 
 namespace Home\Controller;
 
+use Home\Service\PhotoService;
 use Zend\Mvc\Controller\AbstractActionController;
 use ZendService\Flickr\Flickr;
-use Zend\Debug\Debug;
 
 class PhotoController extends AbstractActionController
 {
@@ -18,7 +18,7 @@ class PhotoController extends AbstractActionController
             $id = '5964609109';
         }
         
-        $photoService = $this->getServiceLocator()->get('photo-service');
+        $photoService = new PhotoService();
         $flickr = new Flickr($config['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         

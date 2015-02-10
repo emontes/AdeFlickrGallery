@@ -11,6 +11,7 @@ namespace Grupos\Controller;
 
 use ZendService\Flickr\Flickr;
 use Zend\Mvc\Controller\AbstractActionController;
+use Grupos\Service\GruposService;
 
 class IndexController extends AbstractActionController
 {
@@ -35,7 +36,7 @@ class IndexController extends AbstractActionController
         $flickr = new Flickr($configFlickr['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         
-        $gruposService = $this->getServiceLocator()->get('grupos-service');
+        $gruposService = new GruposService();
         
         $groupInfo = $gruposService->getGroupInfo($flickr, $groupId);
         $fotos = $gruposService->getFotos($flickr,$groupId, $page);

@@ -44,7 +44,6 @@ return array(
     ),
     'service_manager' => array(
         'invokables' => array(
-            'grupos-service' => 'Grupos\Service\GruposService',
         ),
     ),
     'view_manager' => array(

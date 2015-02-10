@@ -27,25 +27,46 @@
             <section class="ef-widget">
               <div class="widget_text widget">
                 <h6><?php echo $this->groupInfo['name']?></h6>
-              
                 <p><?php echo ($this->groupInfo['description'])?></p>
+              </div>
+            </section>
+            
+            <section class="ef-widget">
+              <div class="widget_text widget">
+                <h6> <?php echo $this->groupInfo['members']?> Miembros</h6>
+                <p><?php echo ($this->groupInfo['description'])?></p>
+              </div>
+            </section>
+            
+            <section class="ef-widget">
+              <div class="widget_text widget">
+                <h6> <?php echo $this->groupInfo['pool_count']?> Fotos</h6>
+                <div class="tagcloud">
+                  <ul class="wp-tag-cloud">
+                      <?php $pages = floor($this->groupInfo['pool_count'] / 20)?>
+                      <?php for ($i=1; $i<=$pages; $i++):?>
+                         <li><a 
+                         class="btn ef-hollow-btn btn-<?php if ($i == $this->page) echo 'primary'; else echo 'default'?>" 
+                         title="Página <?php echo $i?>" 
+                         href="/grupos/<?php echo $this->id?>/pag/<?php echo $i?>">Pag. <?php echo $i?></a></li>
+                      <?php endfor;?>
+                  </ul>
+                </div>
               </div>
             </section>
 
             <section class="ef-widget">
               <div class="widget widget_tag_cloud">
-                <h6>Etiquetas del Grupo</h6>
-              
+                <h6>Etiquetas</h6>
                 <div class="tagcloud">
                   <ul class="wp-tag-cloud">
                       <?php foreach ($this->tags as $tag=>$count):?>
+                        <?php if ($tag <> ''):?>
                          <li><a class="tag-link" title="1 topic" href="#"><?php echo $tag?></a></li>
+                        <?php endif;?>
                       <?php endforeach;?>
-                    
-                    
                   </ul>
                 </div>
-
               </div>
             </section>
 
