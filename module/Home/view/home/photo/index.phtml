@@ -24,19 +24,7 @@
           <div class="ef-post-carousel clearfix">
             <ul class="slides">
               <?php foreach ($this->photos as $photo):?>
-                <?php
-                  $imageUri = $photo['details']['Medium 800']->uri;
-                  $size = $photo['details']['Medium 800']->height;
-                  if ($size > 600) {
-                      $imageUri = $photo['details']['Medium 640']->uri;
-                      $size2 = $photo['details']['Medium 640']->height;
-                      if ($size2 > 600) {
-                          $imageUri = $photo['details']['Medium']->uri;
-                      }
-                  }
-                  //Zend\Debug\Debug::dump($photo['details']);die();
-                ?>
-                <li class="ef-slide"><img src="<?php echo $imageUri?>" alt=""></li>
+                <li class="ef-slide"><img src="<?php echo $photo['details']['medium']->uri?>" alt=""></li>
               <?php endforeach;?>
 <!--               <li class="ef-slide"><img src="assets/content/img_768x512.jpg" alt=""></li> -->
 <!--               <li class="ef-slide"><img src="assets/content/img_768x512-1.jpg" alt=""></li> -->

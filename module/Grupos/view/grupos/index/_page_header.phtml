@@ -48,7 +48,8 @@
                          <li><a 
                          class="btn ef-hollow-btn btn-<?php if ($i == $this->page) echo 'primary'; else echo 'default'?>" 
                          title="Página <?php echo $i?>" 
-                         href="/grupos/<?php echo $this->id?>/pag/<?php echo $i?>">Pag. <?php echo $i?></a></li>
+                         href="/grupos/<?php echo $this->id?>/pag/<?php echo $i?>"><?php 
+                         echo $i?></a></li>
                       <?php endfor;?>
                   </ul>
                 </div>

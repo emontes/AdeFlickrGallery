@@ -28,18 +28,43 @@ class PhotoService
         //$cache = $this->getServiceLocator()->get('filesystem');
         $cache = $this->getCache($cacheDir);
         $cacheId = 'photoDetails-'. $id;
-        $photoDetails = $cache->getItem($cacheId, $success);
+        $retval = $cache->getItem($cacheId, $success);
         if (!$success) {
             $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
             try {
                 $photoDetails = $flickr->getImageDetails($id);
+                if (array_key_exists('Medium 800', $photoDetails)) {
+                    $medium = $photoDetails['Medium 800'];
+                    if ($medium->height > 600) {
+                        $medium = $photoDetails['Medium 640'];
+                        if ($medium->height > 600) {
+                            $medium = $photoDetails['Medium'];
+                        }
+                    }
+                } else {
+                    $medium = $photoDetails['Medium 640'];
+                }
+                if (array_key_exists('Original', $photoDetails)) {
+                    $original = $photoDetails['Original'];
+                } else {
+                    if (array_key_exists('Large 2048', $photoDetails)) {
+                        $original = $photoDetails['Large 2048'];
+                    } else {
+                        $original = $photoDetails['Large'];
+                    }
+                }
+                $retval = array(
+                    'medium' => $medium,
+                    'large' => $photoDetails['Large'],
+                    'original' => $original,
+                );
             } catch (FlickrException $e) {
                 $photoDetails = array('Error'=> $e->getMessage());
             }
             
-            $cache->setItem($cacheId, $photoDetails);
+            $cache->setItem($cacheId, $retval);
         }
-        return $photoDetails;
+        return $retval;
     }
     
     public function getPhotoExif($flickr, $id, $cacheDir = 'data/cache')
