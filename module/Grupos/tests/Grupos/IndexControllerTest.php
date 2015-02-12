@@ -1,7 +1,7 @@
 <?php
 use Grupos\Controller\IndexController;
 use Grupos\Service\GruposService;
-use ZendService\Flickr\Flickr;
+use Grupos\Service\FlickrGroups;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
@@ -22,7 +22,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     protected function setUp()
     {
-//         parent::setUp();
+        parent::setUp();
         
         $this->setApplicationConfig(
             include '/paginas/pueblapictures.com/config/application.config.php'
@@ -31,7 +31,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->config = include '/paginas/pueblapictures.com/config/autoload/flickr.local.php';
         $key     = $this->config['flickr']['key'];
         
-        $flickr = new Flickr($key);
+        $flickr = new FlickrGroups($key);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         $this->flickr = $flickr;
         
@@ -40,6 +40,12 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->IndexController = new IndexController();
         $this->gruposService = new GruposService();
 
+    }
+    
+    public function testGetTopicsList()
+    {
+        $groupId = $this->config['flickr']['groups']['puebla']['id'];
+        $groupTopics = $this->gruposService->getGroupTopics($this->flickr, $groupId);
     }
     
     public function testGetGroupInfo()

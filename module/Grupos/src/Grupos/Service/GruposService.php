@@ -25,6 +25,12 @@ class GruposService
                     ));
     }
     
+    public function getGroupTopics($flickr, $groupId)
+    {
+        $groupTopics = $flickr->getTopicsLIst($groupId);
+        return $groupTopics;
+    }
+    
     public function getGroupInfo($flickr, $groupId, $cacheDir='data/cache')
     {
         

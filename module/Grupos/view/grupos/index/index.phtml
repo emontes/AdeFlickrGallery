@@ -12,12 +12,13 @@ $this->headmeta()->appendName('keywords', $keywords);
 ?>
 
 <?php echo $this->partial('/grupos/index/_page_header', array(
-    'pageTitle'  => $this->pageTitle,
-    'groupInfo'  => $this->groupInfo,
-    'tags'       => $this->tags,
-    'categorias' => $this->categorias,
-    'id'         => $this->id,
-    'page'       => $this->page,
+    'pageTitle'   => $this->pageTitle,
+    'groupInfo'   => $this->groupInfo,
+    'groupTopics' => $this->groupTopics,
+    'tags'        => $this->tags,
+    'categorias'  => $this->categorias,
+    'id'          => $this->id,
+    'page'        => $this->page,
 ))?>
 
 <section id="ef-page">

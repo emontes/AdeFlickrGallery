@@ -26,15 +26,17 @@
 
             <section class="ef-widget">
               <div class="widget_text widget">
-                <h6><?php echo $this->groupInfo['name']?></h6>
+                <h6><?php echo $this->groupInfo['name']?> <?php echo $this->groupInfo['members']?> Miembros</h6>
                 <p><?php echo ($this->groupInfo['description'])?></p>
               </div>
             </section>
             
             <section class="ef-widget">
               <div class="widget_text widget">
-                <h6> <?php echo $this->groupInfo['members']?> Miembros</h6>
-                <p><?php echo ($this->groupInfo['description'])?></p>
+                <h6> Temas</h6>
+                <?php foreach ($this->groupTopics as $topic):?>
+                <li><?php echo $topic?></li>
+                <?php endforeach;?>
               </div>
             </section>
             

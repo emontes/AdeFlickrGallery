@@ -9,9 +9,9 @@
 
 namespace Grupos\Controller;
 
-use ZendService\Flickr\Flickr;
 use Zend\Mvc\Controller\AbstractActionController;
 use Grupos\Service\GruposService;
+use Grupos\Service\FlickrGroups;
 
 class IndexController extends AbstractActionController
 {
@@ -33,12 +33,13 @@ class IndexController extends AbstractActionController
         }
        
         
-        $flickr = new Flickr($configFlickr['key']);
+        $flickr = new FlickrGroups($configFlickr['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         
         $gruposService = new GruposService();
         
         $groupInfo = $gruposService->getGroupInfo($flickr, $groupId);
+        $groupTopics = $gruposService->getGroupTopics($flickr, $groupId);
         $fotos = $gruposService->getFotos($flickr,$groupId, $page);
         $groupTags = $gruposService->getGroupTags($flickr, $fotos);
         $tags = $groupTags[0];
@@ -58,12 +59,13 @@ class IndexController extends AbstractActionController
         }
         return array(
             'fotos' => $fotos,
-            'id'         => $id,
-            'page'       => $page,
-            'pageTitle'  => $pageTitle,
-            'groupInfo'  => $groupInfo,
-            'tags'       => $tags,
-            'categorias' => $categorias,
+            'id'                => $id,
+            'page'              => $page,
+            'pageTitle'         => $pageTitle,
+            'groupInfo'         => $groupInfo,
+            'groupTopics'       => $groupTopics,
+            'tags'              => $tags,
+            'categorias'        => $categorias,
             'fotosConCategoria' => $fotosConCategoria,
         );
     }
