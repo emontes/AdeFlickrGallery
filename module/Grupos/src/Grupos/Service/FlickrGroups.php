@@ -3,12 +3,13 @@ namespace Grupos\Service;
 
 use ZendService\Flickr\Flickr;
 use ZendService\Flickr\Exception;
+use Foto\Service\FlickrPhoto;
 use DOMDocument;
 use DOMXPath;
 use Zend\Http\Request as HttpRequest;
 use Zend\Feed\Reader\Collection;
 
-class FlickrGroups extends Flickr
+class FlickrGroups extends FlickrPhoto
 {
     /**
      * Get the Group Info as an array
@@ -20,8 +21,12 @@ class FlickrGroups extends Flickr
     {
         static $method = 'flickr.groups.getInfo';
         
-        $dom = $this->getDom($id, $method);
-        self::checkErrors($dom);
+        if (empty($id)) {
+            throw new Exception\InvalidArgumentException('You must supply a Group id');
+        }
+        
+        $dom = $this->getDom($id, 'group_id', $method);
+        
         $xpath = new DOMXPath($dom);
         $group = $xpath->query('//group')->item(0);
         $retval = array();
@@ -37,8 +42,13 @@ class FlickrGroups extends Flickr
     public function getTopicsList($id)
     {
         static $method = 'flickr.groups.discuss.topics.getList';
-        $dom = $this->getDom($id, $method);
-        self::checkErrors($dom);
+        
+        if (empty($id)) {
+            throw new Exception\InvalidArgumentException('You must supply a Group id');
+        }
+        
+        $dom = $this->getDom($id, 'group_id', $method);
+        
         $xpath = new DOMXPath($dom);
         $topics = array();
         $retval = array();
@@ -49,30 +59,5 @@ class FlickrGroups extends Flickr
         return $retval;
         
     }
-    
-    private function getDom($id, $method)
-    {
-        $options = array('api_key' => $this->apiKey, 'method' => $method, 'group_id' => (string)$id);
-        
-        if (empty($id)) {
-            throw new Exception\InvalidArgumentException('You must supply a Group id');
-        }
-        
-        $request = new HttpRequest;
-        $request->setUri(self::URI_BASE);
-        $request->getQuery()->fromArray($options);
-        $response = $this->httpClient->send($request);
-        
-        if ($response->isServerError() || $response->isClientError()) {
-            throw new Exception\RuntimeException('An error occurred sending request. Status code: '
-                . $response->getStatusCode());
-        }
-        
-        $dom = new DOMDocument();
-        $dom->loadXML($response->getBody());
-        return $dom;
-    }
-    
-    
     
 }

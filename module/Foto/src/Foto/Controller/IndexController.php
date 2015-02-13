@@ -11,7 +11,7 @@ namespace Foto\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Foto\Service\FotoService;
-use ZendService\Flickr\Flickr;
+use Foto\Service\FlickrPhoto;
 
 class IndexController extends AbstractActionController
 {
@@ -26,7 +26,7 @@ class IndexController extends AbstractActionController
         $configFlickr = $config['flickr'];
         
         $fotoService = new FotoService();
-        $flickr = new Flickr($configFlickr['key']);
+        $flickr = new FlickrPhoto($configFlickr['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         
         $idarray = explode('+', $id);
