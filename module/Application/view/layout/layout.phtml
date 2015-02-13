@@ -1,14 +1,24 @@
-<?php echo $this->doctype();?>
+<?php echo $this->doctype();
+$this->headMeta()->appendHttpEquiv('Content-Type',
+    'text/html; charset=UTF-8')
+    ->appendHttpEquiv('Content-Language', 'es-MX')
+    ->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0')
+    ->appendName('author','www.turista.com.mx');
+
+if (!isset($this->bodyClass)) {
+    $this->bodyClass = 'fireform-slider page-template-templateshome-template ef-overlay';
+}
+?>
 
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('PueblaPictures')->setSeparator(' - ')->setAutoEscape(false) ?>
-
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
         ?>
+        <?php echo $this->headTitle($this->siteName)->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        
 
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/assets/favicon.png'))
@@ -40,20 +50,11 @@
       <script src="js/ie/respond.min.js"></script>
     <![endif]-->
     </head>
-    <body class="fireform-slider page-template-templateshome-template ef-overlay">
+    <body class="<?php echo $this->bodyClass?>">
 <!--     <body class="fireform-slider page-template-templateshome-template ef-fullwidth-page ef-overlay"> -->
 <!--     <body class="page-template-templatesportfolio-template ef-fullwidth-page ef-has-widgets"> -->
     <?php echo $this->partial('partial/top-bar')?>   
-    <section id="ef-page-header">
-      <div id="ef-head-inner">
-        <div id="ef-page-controls"></div>
-      </div>
-    </section>
     
-    
-    <section id="ef-page"></section>
-
-    <figure id="slide_desc"></figure>
       
             <?php echo $this->content; ?>
       
@@ -63,7 +64,7 @@
     </body>
 </html>
 
-  <script type="text/javascript" src="/js/jquery.min.js"></script>
+   <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.easing.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -81,6 +82,11 @@
     <script type="text/javascript" src="/js/shortcodes/inview.min.js"></script>
     <script type="text/javascript" src="/js/jquery.flexslider.min.js"></script>
     <script type="text/javascript" src="/js/shadowbox/shadowbox.js"></script>
+
+    <script type="text/javascript" src="/js/jquery.mobilemenu.min.js"></script>
+    <script type="text/javascript" src="/js/jflickrfeed.min.js"></script>
+    <script type="text/javascript" src="/js/instagram.min.js"></script>
+
     <script type="text/javascript" src="/js/shortcodes/custom.js"></script>
     <script type="text/javascript" src="/js/setup.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>

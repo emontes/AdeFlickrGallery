@@ -2,7 +2,7 @@
 return array(
     'modules' => array(
         'Application',
-        'EdpLayouts',
+        //'EdpLayouts',
         'Home',
         'Galerias',
         'Grupos',

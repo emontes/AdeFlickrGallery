@@ -31,6 +31,9 @@ class IndexController extends AbstractActionController
         if (!$page) {
             $page = 1;
         }
+        
+        $this->layout()->setVariable('bodyClass', 
+            'page-template-templatesportfolio-template ef-fullwidth-page ef-has-widgets');
        
         
         $flickr = new FlickrGroups($configFlickr['key']);

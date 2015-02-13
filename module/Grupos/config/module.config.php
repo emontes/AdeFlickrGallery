@@ -51,8 +51,6 @@ return array(
             'Grupos' => __DIR__ . '/../view',
         ),
     ),
-    'module_layouts' => array(
-        'Grupos' => 'layout/grupo.phtml',
-    ),
+    
     
 );
