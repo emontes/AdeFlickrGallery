@@ -26,32 +26,44 @@
 
             <section class="ef-widget">
               <div class="widget_text widget">
-                <h6><?php echo $this->groupInfo['name']?> <?php echo $this->groupInfo['members']?> Miembros</h6>
+                <h6><?php echo $this->groupInfo['name']?></h6>
+                <h6><?php echo $this->groupInfo['members']?> Miembros</h6>
                 <p><?php echo ($this->groupInfo['description'])?></p>
               </div>
             </section>
             
             <section class="ef-widget">
               <div class="widget_text widget">
-                <h6> Temas</h6>
-                <?php foreach ($this->groupTopics as $topic):?>
-                <li><?php echo $topic?></li>
+                <h6>Discusiones</h6>
+                <div class="tagcloud">
+                <ul class="wp-tag-cloud">
+                <?php foreach ($this->groupTopics as $topicId => $topic):?>
+                <li>
+                <a class="btn ef-hollow-btn btn-default"
+                href="https://www.flickr.com/groups/<?php echo $this->id?>/discuss/<?php echo $topicId?>/">
+                <?php echo $topic?></a></li>
                 <?php endforeach;?>
+                </ul>
+                </div>
               </div>
             </section>
             
             <section class="ef-widget">
               <div class="widget_text widget">
-                <h6> <?php echo $this->groupInfo['pool_count']?> Fotos</h6>
+                <?php $pages = ceil($this->groupInfo['pool_count'] / 20)?>
+                <h6> <?php echo $this->groupInfo['pool_count']?> Fotos en 
+                <?php echo $pages?> Páginas</h6>
                 <div class="tagcloud">
                   <ul class="wp-tag-cloud">
-                      <?php $pages = floor($this->groupInfo['pool_count'] / 20)?>
+                      
                       <?php for ($i=1; $i<=$pages; $i++):?>
+                         
                          <li><a 
                          class="btn ef-hollow-btn btn-<?php if ($i == $this->page) echo 'primary'; else echo 'default'?>" 
                          title="Página <?php echo $i?>" 
                          href="/grupos/<?php echo $this->id?>/pag/<?php echo $i?>"><?php 
                          echo $i?></a></li>
+                         <?php if ( ($i > 20) && ($i+9 < $pages)) $i = $i + 9?>
                       <?php endfor;?>
                   </ul>
                 </div>
