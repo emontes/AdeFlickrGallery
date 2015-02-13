@@ -21,6 +21,23 @@ class IndexController extends AbstractActionController
         if (!$id) {
             $id = '5964609109';
         }
+        $grupoId = $this->params()->fromRoute('grupo');
+        $page = $this->params()->fromRoute('page');
+        
+        $config = $this->getServiceLocator()->get('config');
+        $configFlickr = $config['flickr'];
+        $retval = array();
+        if (isset($grupoId)) {
+            $grupo = array(
+              'link'  => '/grupos/' . $grupoId,
+              'title' => $configFlickr['groups'][$grupoId]['title'],  
+            );
+            if (isset($page)) {
+                $grupo['link'] .= '/pag/' . $page;
+            }
+            $retval['grupo'] = $grupo;
+        }
+        
         
         $config = $this->getServiceLocator()->get('config');
         $configFlickr = $config['flickr'];
@@ -40,11 +57,9 @@ class IndexController extends AbstractActionController
             );
         }
         
+        $retval['photos'] = $photos;
         
-        
-        return array(
-            'photos' => $photos,
-        );
+        return $retval;
     }
 
 }

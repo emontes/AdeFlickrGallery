@@ -60,7 +60,10 @@ $this->headmeta()->appendName('keywords', $keywords);
                   <div class="ef-links-holder">
                     <?php 
                       $link =  $foto['id'] . '+' . $foto['id2'] . '+' . $foto['id3'];
-                      //$codedLink = gzcompress($link);
+                      $link .= '/grupo-' . $this->id;
+                      if (isset($this->page) && $this->page > 1) {
+                          $link .= '/pag/' . $this->page;
+                      }
                     ?>
                     <a class="ef-lnk icn-ef" href="/foto-<?php echo $link?>">Detalles</a>
                     <a class="ef-lightbox icn-ef" 

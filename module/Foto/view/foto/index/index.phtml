@@ -80,8 +80,11 @@
 
         <div class="col-md-8 col-md-pull-4">
           <div class="ef-page-inner">
-
-            <small class="ef-post-info">Category: <a href="#">Fashion</a></small>
+            <?php if (isset($this->grupo)):?>
+              <small class="ef-post-info">Grupo: <a 
+              href="<?php echo $this->grupo['link']?>"><?php echo $this->grupo['title']?>
+              </a></small>
+            <?php endif;?>
 
             <h3><?php echo $this->photos[0]['info']['title']?></h3>
 

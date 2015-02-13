@@ -11,7 +11,7 @@ return array(
                 'type'    => 'Segment',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/foto[-:id]',
+                    'route'    => '/foto[-:id][/grupo-:grupo][/pag/:page]',
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
