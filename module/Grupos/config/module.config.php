@@ -43,12 +43,69 @@ return array(
         ),
     ),
     'service_manager' => array(
+        'factories'  => array(
+            'grupos-navigation' => 'Grupos\Factory\GruposNavigationFactory',
+        ),
         'invokables' => array(
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
             'Grupos' => __DIR__ . '/../view',
+        ),
+    ),
+    
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Grupos',
+                'route' => 'grupos-index',
+                
+            ),
+            array(
+                'label' => 'Otras Galerías',
+                'uri'   => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Turista',
+                        'uri'   => 'http://www.turista.com.mx',
+                        'pages' => array(
+                            array(
+                                'label' => 'Chiapas',
+                                'uri'   => 'http://www.chiapaspictures.com'
+                            ),
+                            array(
+                                'label' => 'México',
+                                'uri'   => 'http://www.mexicopictures.net'
+                            ),
+                            array(
+                                'label' => 'Cancún',
+                                'uri'   => 'http://www.cancunpictures.net'
+                            ),
+                            array(
+                                'label' => 'Cancún Image Gallery',
+                                'uri'   => 'http://turistacancun.com/gallery'
+                            ),
+                            array(
+                                'label' => 'Yucatan',
+                                'uri'   => 'http://www.yucatanpictures.com'
+                            ),
+                        )
+                    ),
+                    array(
+                        'label' => 'Social',
+                        'uri'   => '#',
+                        'pages' => array(
+                            array(
+                                'label' => 'Flickr Turista',
+                                'uri'   => 'https://www.flickr.com/photos/turistamexico/',
+                            )
+                        )
+                    )
+                    
+                )
+            )
+            
         ),
     ),
     

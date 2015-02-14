@@ -8,6 +8,10 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 if (!isset($this->bodyClass)) {
     $this->bodyClass = 'fireform-slider page-template-templateshome-template ef-overlay';
 }
+$gruposnav = $this->navigation('grupos-navigation')->toArray();
+$page = $this->navigation('navigation')->findOneBy('label', 'Grupos');
+$page->addPages($gruposnav);
+
 ?>
 
 <html lang="en">

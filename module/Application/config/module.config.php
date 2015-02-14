@@ -48,6 +48,14 @@ return array(
             ),
         ),
     ),
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home',
+            )
+        ),
+    ),
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -55,6 +63,9 @@ return array(
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
+        ),
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
     ),
     'translator' => array(
@@ -88,5 +99,6 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    
     
 );
