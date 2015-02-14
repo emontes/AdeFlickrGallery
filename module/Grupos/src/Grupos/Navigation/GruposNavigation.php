@@ -28,7 +28,8 @@ class GruposNavigation extends DefaultNavigationFactory
                $active = false;
            }
            $configuration['navigation'][$this->getName()][$idGrupo] = array(
-               'label' => $grupo['title'],
+               'id'     => $idGrupo,
+               'label'  => $grupo['title'],
                'uri'    => '/grupos/' . $grupo['uri'],
                'active' => $active,
            );

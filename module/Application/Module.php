@@ -29,6 +29,7 @@ class Module
         $configFlickr = $config['flickr'];
         $layoutView = $e->getViewModel();
         $layoutView->setVariable('configFlickr', $configFlickr);
+        $layoutView->setVariable('externalSites', $config['external_sites']);
         $layoutView->setVariable('siteName', $config['siteName']);
     }
 

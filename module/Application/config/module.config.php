@@ -53,6 +53,13 @@ return array(
             array(
                 'label' => 'Home',
                 'route' => 'home',
+                'order' => '100',
+            ),
+            array(
+                'id'    => 'external_sites',
+                'label' => 'Otras Galerías',
+                'uri'   => '#',
+                'order' => '700',
             )
         ),
     ),
