@@ -80,10 +80,21 @@ return array(
     'navigation' => array(
         'default' => array(
             array(
+                'label' => 'Home',
+                'route' => 'home',
+                'order' => '100',
+            ),
+            array(
                 'label' => 'Grupos',
                 'route' => 'grupos-index',
                 'order' => '300',
             ),
+            array(
+                'id'    => 'external_sites',
+                'label' => 'Otras Galerías',
+                'uri'   => '#',
+                'order' => '700',
+            )
         ),
     ),
 );

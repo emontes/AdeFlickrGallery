@@ -10,10 +10,16 @@ if (!isset($this->bodyClass)) {
 }
 $gruposnav = $this->navigation('grupos-navigation')->toArray();
 $page = $this->navigation('navigation')->findOneBy('label', 'Grupos');
-$page->addPages($gruposnav);
+if ($gruposnav) {
+    $page->addPages($gruposnav);
+}
+
 $page = $this->navigation('navigation')->findOneBy('id','external_sites');
 $externalSites = $this->externalSites;
-$page->addPages($this->externalSites);
+if ($externalSites) {
+    $page->addPages($this->externalSites);
+}
+
 ?>
 
 <html lang="en">
@@ -59,12 +65,12 @@ $page->addPages($this->externalSites);
     <body class="<?php echo $this->bodyClass?>">
 <!--     <body class="fireform-slider page-template-templateshome-template ef-fullwidth-page ef-overlay"> -->
 <!--     <body class="page-template-templatesportfolio-template ef-fullwidth-page ef-has-widgets"> -->
-    <?php echo $this->partial('partial/top-bar')?>   
+    <?php echo $this->partial('layout/partial/top-bar')?>   
     
       
             <?php echo $this->content; ?>
       
-        <?php echo $this->partial('partial/footer')?>
+        <?php echo $this->partial('layout/partial/footer')?>
 
         <?php echo $this->inlineScript() ?>
     </body>

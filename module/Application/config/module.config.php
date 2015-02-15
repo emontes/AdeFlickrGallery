@@ -48,21 +48,7 @@ return array(
             ),
         ),
     ),
-    'navigation' => array(
-        'default' => array(
-            array(
-                'label' => 'Home',
-                'route' => 'home',
-                'order' => '100',
-            ),
-            array(
-                'id'    => 'external_sites',
-                'label' => 'Otras Galerías',
-                'uri'   => '#',
-                'order' => '700',
-            )
-        ),
-    ),
+    
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',

@@ -42,5 +42,17 @@ class Module implements AutoloaderProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'), 100);
+    }
+    
+    public function onDispatch(MvcEvent $e)
+    {
+        $sm = $e->getApplication()->getServiceManager();
+        $config = $sm->get('config');
+        $configFlickr = $config['flickr'];
+        $layoutView = $e->getViewModel();
+        $layoutView->setVariable('configFlickr', $configFlickr);
+        $layoutView->setVariable('externalSites', $config['external_sites']);
+        $layoutView->setVariable('siteName', $config['siteName']);
     }
 }
