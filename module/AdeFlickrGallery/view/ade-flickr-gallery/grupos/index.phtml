@@ -1,0 +1,92 @@
+<?php 
+$this->headtitle($this->pageTitle);
+$this->headmeta()->appendName('description', substr(strip_tags($this->groupInfo['description']),0,150) );
+$keywords = 'fotos';
+foreach ($this->categorias as $categoria) {
+    if ($categoria <> '') {
+        $keywords = $keywords . ', ' . $categoria;
+    }
+}
+$this->headmeta()->appendName('keywords', $keywords);
+
+?>
+
+<?php 
+echo $this->partial('ade-flickr-gallery/grupos/_page_header', array(
+    'pageTitle'   => $this->pageTitle,
+    'groupInfo'   => $this->groupInfo,
+    'groupTopics' => $this->groupTopics,
+    'tags'        => $this->tags,
+    'categorias'  => $this->categorias,
+    'id'          => $this->id,
+    'page'        => $this->page,
+));
+?>
+
+<section id="ef-page">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Adaptable Grafico -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5136877882943908"
+         data-ad-slot="9139977472"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+      <div class="ef-page-inner">
+        <div class="ef-portfolio infinite-scrolling ef-isotope">
+        
+        <?php foreach ($this->fotos as $foto):?>
+          <?php 
+          $categories = '';
+          $categoriesArray = explode('-', $this->fotosConCategoria[$foto['id']]);
+          foreach ($categoriesArray as $fcc){
+             
+            $categories .= 'category-' . $fcc . ' ';    
+          }
+          ?>
+          <div class="ef-post <?php echo $categories?>">
+            <div class="ef-post-inner">
+              <div class="ef-proj-img">
+              
+                <ul class="ef-fadeshow" data-interval="3000">
+                  <li><img src="<?php echo $foto['image1']?>" alt="<?php echo $foto['title']?>"></li>
+                  <li><img src="<?php echo $foto['image2']?>" alt="<?php echo $foto['title']?>"></li>
+                  <li><img src="<?php echo $foto['image3']?>" alt="<?php echo $foto['title']?>"></li>
+                </ul>
+
+                <div class="ef-proj-desc">
+                  <h4><?php echo $foto['title']?></h4>
+                  <div class="ef-links-holder">
+                    <?php 
+                      $link =  $foto['id'] . '+' . $foto['id2'] . '+' . $foto['id3'];
+                      $link .= '/grupo-' . $this->id;
+                      if (isset($this->page) && $this->page > 1) {
+                          $link .= '/pag/' . $this->page;
+                      }
+                    ?>
+                    <a class="ef-lnk icn-ef" href="/foto-<?php echo $link?>">Detalles</a>
+                    <a class="ef-lightbox icn-ef" 
+                       title="<?php echo $foto['title']?>" 
+                       href="<?php echo $foto['largeImg']?>" 
+                       data-sbrel="portfolio-group">Agrandar</a>
+                  </div>
+                </div>
+               
+
+              </div>
+            </div>
+          </div>
+        <?php endforeach;?>
+
+         
+
+        </div>
+        <nav id="ef-page_nav">
+          <a href="/grupos/<?php echo $this->id?>/pag/<?php echo $this->page + 1?>"></a>
+        </nav>
+      </div>
+
+    </section>

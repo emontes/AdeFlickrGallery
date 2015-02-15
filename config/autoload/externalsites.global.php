@@ -3,7 +3,7 @@ return array(
     'external_sites' => array(
             array(
                 'label' => 'Turista',
-                'uri'   => 'http://www.turista.com.mx/modules.php?name=Fotos',
+                'uri'   => 'http://puebla.turista.com.mx/modules.php?name=Fotos',
                 'pages' => array(
                     array(
                         'label' => 'Chiapas',
