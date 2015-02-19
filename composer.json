@@ -6,7 +6,7 @@
     "zendframework/zendframework" : "2.3.*",
     "zendframework/zendservice-flickr" : "2.0.*"
   },
-  "keywords" : [ "framework", "zf2" ],
+  "keywords" : [ "framework", "zf2", "Flickr" ],
   "license" : "BSD-3-Clause",
   "homepage" : "https://github.com/emontes/AdeFlickrGallery/"
 }

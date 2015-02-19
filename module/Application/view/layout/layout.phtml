@@ -8,6 +8,16 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 if (!isset($this->bodyClass)) {
     $this->bodyClass = 'fireform-slider page-template-templateshome-template ef-overlay';
 }
+
+if (isset($this->menuCollections)){
+    $menu = array($this->menuCollections);
+    //\Zend\Debug\Debug::dump($menu);die();
+    //$page = $this->navigation('navigation')->findOneBy('label', 'Home');
+    $page = $this->navigation('navigation');
+    $page->addPages($menu);
+}
+
+
 $gruposnav = $this->navigation('grupos-navigation')->toArray();
 $page = $this->navigation('navigation')->findOneBy('label', 'Grupos');
 if ($gruposnav) {

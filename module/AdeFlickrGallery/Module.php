@@ -12,6 +12,8 @@ namespace AdeFlickrGallery;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use AdeFlickrGallery\Service\ColeccionesService;
+use AdeFlickrGallery\Service\FlickrCollections;
 
 class Module implements AutoloaderProviderInterface
 {
@@ -54,5 +56,11 @@ class Module implements AutoloaderProviderInterface
         $layoutView->setVariable('configFlickr', $configFlickr);
         $layoutView->setVariable('externalSites', $config['external_sites']);
         $layoutView->setVariable('siteName', $config['siteName']);
+        $flickr = new FlickrCollections($configFlickr['key']);
+        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
+        $collectionsService = new ColeccionesService();
+        $menu = $collectionsService->getCollectionTreeMenu(
+            $flickr, $configFlickr['user_id'], $configFlickr['collections']['puebla']);
+        $layoutView->setVariable('menuCollections', $menu);
     }
 }

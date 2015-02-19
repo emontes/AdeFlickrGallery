@@ -2,9 +2,10 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'AdeFlickrGallery\Controller\Home'   => 'AdeFlickrGallery\Controller\HomeController',
-            'AdeFlickrGallery\Controller\Foto'  => 'AdeFlickrGallery\Controller\FotoController',
-            'AdeFlickrGallery\Controller\Grupos' => 'AdeFlickrGallery\Controller\GruposController',
+            'AdeFlickrGallery\Controller\Home'        => 'AdeFlickrGallery\Controller\HomeController',
+            'AdeFlickrGallery\Controller\Foto'        => 'AdeFlickrGallery\Controller\FotoController',
+            'AdeFlickrGallery\Controller\Grupos'      => 'AdeFlickrGallery\Controller\GruposController',
+            'AdeFlickrGallery\Controller\Colecciones' => 'AdeFlickrGallery\Controller\ColeccionesController',
         ),
     ),
     'router' => array(
@@ -20,6 +21,17 @@ return array(
                     ),
                 ),
             ),
+            'coleccion' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/coleccion[/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'AdeFlickrGallery\Controller',
+                        'controller'    => 'Colecciones',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),//coleccion
             'foto' => array(
                 'type'    => 'Segment',
                 'options' => array(
@@ -79,11 +91,11 @@ return array(
     ),
     'navigation' => array(
         'default' => array(
-            array(
-                'label' => 'Home',
-                'route' => 'home',
-                'order' => '100',
-            ),
+//             array(
+//                 'label' => 'Home',
+//                 'route' => 'home',
+//                 'order' => '100',
+//             ),
             array(
                 'label' => 'Grupos',
                 'route' => 'grupos-index',

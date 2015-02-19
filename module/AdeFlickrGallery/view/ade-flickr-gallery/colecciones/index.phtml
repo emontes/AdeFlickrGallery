@@ -1,0 +1,101 @@
+<section id="ef-page-header">
+      <div id="ef-head-inner">
+        <div id="ef-page-title"><span><?php echo $this->collectionInfo['title']?></span></div>
+        <div id="ef-page-controls">
+          <a id="ef-widgets-tab" class="icn-ef" href="#"></a>
+        </div>
+      </div>
+      <aside id="ef-widgets">
+        <div id="ef-widgets-pane">
+          <div id="ef-widgets-inner">
+
+            <section class="ef-widget">
+              <div class="widget_text widget">
+                <h6><?php echo $this->collectionInfo['title']?></h6>
+              
+                <p><?php echo $this->collectionInfo['description']?></p>
+              </div>
+            </section>
+
+            <section class="ef-widget">
+              <div class="widget widget_tag_cloud">
+                <h6>Portfolio tags</h6>
+              
+                <div class="tagcloud">
+                  <ul class="wp-tag-cloud">
+                    <li><a class="tag-link" title="1 topic" href="#">man</a></li>
+                    <li><a class="tag-link" title="2 topics" href="#">street</a></li>
+                    <li><a class="tag-link" title="1 topics" href="#">wall</a></li>
+                    <li><a class="tag-link" title="2 topics" href="#">sky</a></li>
+                    <li><a class="tag-link" title="3 topics" href="#">development</a></li>
+                    <li><a class="tag-link" title="1 topics" href="#">fashion</a></li>
+                    <li><a class="tag-link" title="2 topics" href="#">love</a></li>
+                    <li><a class="tag-link" title="4 topics" href="#">dark</a></li>
+                    <li><a class="tag-link" title="2 topics" href="#">bridge</a></li>
+                    <li><a class="tag-link" title="3 topics" href="#">cooking</a></li>
+                    <li><a class="tag-link" title="4 topics" href="#">light</a></li>
+                    <li><a class="tag-link" title="1 topics" href="#">night</a></li>
+                    <li><a class="tag-link" title="1 topics" href="#">night</a></li>
+                    <li><a class="tag-link" title="2 topics" href="#">website</a></li>
+                    <li><a class="tag-link" title="1 topics" href="#">road</a></li>
+                    <li><a class="tag-link" title="5 topics" href="#">party</a></li>
+                  </ul>
+                </div>
+
+              </div>
+            </section>
+
+            <section class="ef-widget">
+              <div class="widget widget_flickr">
+                <h6>Flickr feed</h6>
+              
+                <ul class="jflickr clearfix"></ul>
+
+              </div>
+            </section>
+
+            <section class="ef-widget">
+              <div class="widget widget_indtagram">
+                <h6>From Instagram</h6>
+              
+                <ul class="instagram clearfix"></ul>
+
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="ef-page">
+
+      <div class="ef-featured-img">
+        <div id="ef-gallery-outer">
+          <div id="ef-gallery-info-pane">
+            <span id="ef-counter"></span>
+            <span id="ef-gallery-title"></span>
+          </div>
+          <div id="ef-gallery-wrapper">
+            <div id="ef-gallery" class="clearfix">
+              <ul class="slides clearfix">
+              <?php foreach ($this->collectionInfo['childs'] as $child):?>
+                <li class="ef-slide">
+                  <div class="ef-gal-img"><a href="<?php echo $child['link']?>">
+                  <img src="<?php echo $child['icon'] ?>" title="<?php echo $child['title']?>" alt="" /
+                  ></a>
+                  </div>
+                </li>
+              <?php endforeach;?>
+
+                
+                
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+

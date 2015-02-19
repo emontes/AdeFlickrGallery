@@ -1,7 +1,6 @@
 <?php
 namespace AdeFlickrGallery\Service;
 
-use ZendService\Flickr\Flickr;
 use ZendService\Flickr\Exception;
 use AdeFlickrGallery\Service\FlickrPhoto;
 use DOMDocument;
