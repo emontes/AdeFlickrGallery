@@ -8,12 +8,17 @@ class ColeccionesService
 {
     public function getCollectionInfo($flickr, $userId, $collectionId, $cacheDir = 'data/cache')
     {
-        try {
-            $collectionInfo = $flickr->getCollectionInfo($userId, $collectionId);
-        } catch (FlickrException $e) {
-            echo $e->getMessage();
+        $cache = $this->getCache($cacheDir);
+        $cacheId = 'collectionInfo' . $collectionId;
+        $collectionInfo = $cache->getItem($cacheId, $success);
+        if (!$success) {
+            try {
+                $collectionInfo = $flickr->getCollectionInfo($userId, $collectionId);
+                $cache->setItem($cacheId, $collectionInfo);
+            } catch (FlickrException $e) {
+                echo $e->getMessage();
+            }
         }
-        
         return $collectionInfo;
     }
     

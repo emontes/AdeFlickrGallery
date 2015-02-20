@@ -3,6 +3,7 @@ namespace AdeFlickrGallery\Service;
 
 use ZendService\Flickr\Exception;
 use AdeFlickrGallery\Service\FlickrPhoto;
+use AdeFlickrGallery\Service\FotoService;
 use DOMDocument;
 use DOMXPath;
 use Zend\Http\Request as HttpRequest;
@@ -69,7 +70,7 @@ class FlickrCollections extends FlickrPhoto
                 $icon = $child->getAttribute('iconlarge');
                 if ($child->nodeName == 'set') {
                     $link = '/album/';
-                    $icon = '';
+                    $icon = $this->getCollectionAlbumIcon($child->getAttribute('id'));
                 }
                 $childs[] = array(
                     'title'       => $child->getAttribute('title'),
@@ -84,6 +85,24 @@ class FlickrCollections extends FlickrPhoto
             
         
         return $retval;
+    }
+    
+    public function getCollectionAlbumIcon ($albumId)
+    {
+        $fotoService = new FotoService();
+        static $method = 'flickr.photosets.getInfo';
+        $id_text = 'photoset_id';
+        $dom = $this->getDom($albumId, $id_text, $method);
+        $xpath = new DOMXPath($dom);
+        $xalbum = $xpath->query('//photoset')->item(0);
+        $primaryId = $xalbum->getAttribute('primary');
+        $details = $fotoService->getPhotoDetails($this, $primaryId);
+        if ($details['medium'] <> null) {
+            $uri = $details['medium']->uri;
+        } else {
+            $uri = $details['original']->uri;
+        }
+        return $uri;
     }
     
     public function getColletionTreeMenu($userId, $collectionId)
