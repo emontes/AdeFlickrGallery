@@ -62,7 +62,7 @@ echo $this->partial('ade-flickr-gallery/album/_page_header', array(
                   <div class="ef-links-holder">
                     <?php 
                       $link =  $foto['id'] . '+' . $foto['id2'] . '+' . $foto['id3'];
-                      $link .= '/grupo-' . $this->id;
+                      $link .= '/album-' . $this->id;
                       if (isset($this->page) && $this->page > 1) {
                           $link .= '/pag/' . $this->page;
                       }
@@ -84,9 +84,12 @@ echo $this->partial('ade-flickr-gallery/album/_page_header', array(
          
 
         </div>
+        <?php $pages = ceil($this->albumInfo['count_photos'] / 20);?>
+        <?php if ($this->page < $pages):?>
         <nav id="ef-page_nav">
           <a href="/album/<?php echo $this->id?>/pag/<?php echo $this->page + 1?>"></a>
         </nav>
+        <?php endif;?>
       </div>
 
     </section>

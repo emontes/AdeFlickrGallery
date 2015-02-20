@@ -85,6 +85,12 @@
               href="<?php echo $this->grupo['link']?>"><?php echo $this->grupo['title']?>
               </a></small>
             <?php endif;?>
+            
+            <?php if (isset($this->album)):?>
+              <small class="ef-post-info">Album: <a 
+              href="<?php echo $this->album['link']?>"><?php echo $this->album['title']?>
+              </a></small>
+            <?php endif;?>
 
             <h3><?php echo $this->photos[0]['info']['title']?></h3>
 

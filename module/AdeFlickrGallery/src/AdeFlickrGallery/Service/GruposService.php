@@ -171,6 +171,9 @@ class GruposService
                     ) ;
                 
             }
+            if (count($fotos < $perPage)) {
+                $perPage = count($fotos);
+            }
 
     
             $i=0;

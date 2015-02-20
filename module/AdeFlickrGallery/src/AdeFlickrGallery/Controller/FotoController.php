@@ -12,6 +12,7 @@ namespace AdeFlickrGallery\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use AdeFlickrGallery\Service\FotoService;
 use AdeFlickrGallery\Service\FlickrPhoto;
+use AdeFlickrGallery\Service\AlbumService;
 
 class FotoController extends AbstractActionController
 {
@@ -22,10 +23,15 @@ class FotoController extends AbstractActionController
             $id = '5964609109';
         }
         $grupoId = $this->params()->fromRoute('grupo');
+        $albumId = $this->params()->fromRoute('album');
         $page = $this->params()->fromRoute('page');
         
         $config = $this->getServiceLocator()->get('config');
         $configFlickr = $config['flickr'];
+        
+        $flickr = new FlickrPhoto($configFlickr['key']);
+        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
+        
         $retval = array();
         if (isset($grupoId)) {
             $grupo = array(
@@ -38,13 +44,26 @@ class FotoController extends AbstractActionController
             $retval['grupo'] = $grupo;
         }
         
+        if (isset($albumId)) {
+            $albumService = new AlbumService();
+            $albumInfo = $albumService->getAlbumInfo($flickr, $albumId);
+            
+            $album = array(
+                'link'   => '/album/' . $albumId,
+                'title'  => $albumInfo['title'],
+            );
+            if (isset($page)) {
+                $album['link'] .= '/pag/' .$page;
+            }
+            $retval['album'] = $album;
+        }
+        
         
         $config = $this->getServiceLocator()->get('config');
         $configFlickr = $config['flickr'];
         
         $fotoService = new FotoService();
-        $flickr = new FlickrPhoto($configFlickr['key']);
-        $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
+        
         
         $idarray = explode('+', $id);
         $photos = array();

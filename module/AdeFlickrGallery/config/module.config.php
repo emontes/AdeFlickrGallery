@@ -48,7 +48,7 @@ return array(
             'foto' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/foto[-:id][/grupo-:grupo][/pag/:page]',
+                    'route'    => '/foto[-:id][/album-:album][/grupo-:grupo][/pag/:page]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'AdeFlickrGallery\Controller',
                         'controller'    => 'Foto',

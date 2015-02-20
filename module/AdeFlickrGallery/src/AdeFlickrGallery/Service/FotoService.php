@@ -41,7 +41,12 @@ class FotoService
                         }
                     }
                 } else {
-                    $medium = $photoDetails['Medium 640'];
+                    if (array_key_exists('Medium 640', $photoDetails)) {
+                        $medium = $photoDetails['Medium 640'];
+                    } else {
+                        $medium = $photoDetails['Medium'];
+                    }
+                    
                 }
                 if (array_key_exists('Original', $photoDetails)) {
                     $original = $photoDetails['Original'];

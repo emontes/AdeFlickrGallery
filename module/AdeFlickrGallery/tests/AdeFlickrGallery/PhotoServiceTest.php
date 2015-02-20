@@ -34,8 +34,9 @@ class PhotoServiceTest extends AbstractControllerTestCase
     
     public function testGetPhotoDetails()
     {
-        $id = '15639103582';
+        $id = '6903385984';
         $this->photoService->getPhotoDetails($this->flickr, $id, $this->cacheDir);
+        echo 'pato';
     }
     
     public function testGetPhotoTrio()

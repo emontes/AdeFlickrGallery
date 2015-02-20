@@ -28,6 +28,12 @@ class AlbumController extends AbstractActionController
         $albumService = new AlbumService();
         
         $albumInfo = $albumService->getAlbumInfo($flickr, $albumId);
+        
+        if (!$albumInfo) {
+            $this->flashmessenger()->addMessage('Album No Encontrado');
+            $this->redirect()->toRoute('home');
+        }
+        
         $pageTitle = 'Album: ' . $albumInfo['title'];
         
         $fotos = $albumService->getFotos($flickr, $albumId, $page);
