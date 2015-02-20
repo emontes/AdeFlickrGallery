@@ -1,6 +1,6 @@
 <?php 
 $this->headtitle($this->pageTitle);
-$this->headmeta()->appendName('description', substr(strip_tags($this->groupInfo['description']),0,150) );
+$this->headmeta()->appendName('description', substr(strip_tags($this->albumInfo['description']),0,150) );
 $keywords = 'fotos';
 foreach ($this->categorias as $categoria) {
     if ($categoria <> '') {
@@ -85,7 +85,7 @@ echo $this->partial('ade-flickr-gallery/album/_page_header', array(
 
         </div>
         <nav id="ef-page_nav">
-          <a href="/grupos/<?php echo $this->id?>/pag/<?php echo $this->page + 1?>"></a>
+          <a href="/album/<?php echo $this->id?>/pag/<?php echo $this->page + 1?>"></a>
         </nav>
       </div>
 

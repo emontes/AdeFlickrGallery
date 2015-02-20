@@ -43,7 +43,6 @@ class GruposController extends AbstractActionController
 
         $categorias = $gruposService->getGroupCategories($tags);
         $fotosConCategoria = $gruposService->getPhotosCategories($fotosConTags, $categorias);
-        //\Zend\Debug\Debug::dump($fotosConCategoria,'fotos',true);die();
         $fotos = $gruposService->makeFotosTrio($fotos);
          
 

@@ -25,9 +25,10 @@ return array(
             'album' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/album[/:id]',
+                    'route'    => '/album[/:id][/pag][/:page]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'AdeFlickrGallery\Controller',
+                        
                         'controller'    => 'Album',
                         'action'        => 'index',
                     ),
