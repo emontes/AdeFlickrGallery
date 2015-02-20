@@ -104,7 +104,7 @@
                 <li class="ef-taghead">Etiquetado:</li>
                 <?php foreach ($tags as $tag):?>
                     <?php if ($tag <> ''):?>
-                        <li><a rel="tag" href="#"><?php echo $tag?></a></li>
+                        <li><a rel="tag" href="/tag/<?php echo $tag?>"><?php echo $tag?></a></li>
                     <?php endif;?>
                 <?php endforeach;?>
               </ul>

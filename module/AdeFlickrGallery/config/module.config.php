@@ -7,6 +7,7 @@ return array(
             'AdeFlickrGallery\Controller\Grupos'      => 'AdeFlickrGallery\Controller\GruposController',
             'AdeFlickrGallery\Controller\Colecciones' => 'AdeFlickrGallery\Controller\ColeccionesController',
             'AdeFlickrGallery\Controller\Album'       => 'AdeFlickrGallery\Controller\AlbumController',
+            'AdeFlickrGallery\Controller\Tag'         => 'AdeFlickrGallery\Controller\TagController',
         ),
     ),
     'router' => array(
@@ -34,6 +35,18 @@ return array(
                     ),
                 ),
             ),//album
+            'tag' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/tag[/:tag][/pag][/:page]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'AdeFlickrGallery\Controller',
+            
+                        'controller'    => 'Tag',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),//tag
             'coleccion' => array(
                 'type'    => 'Segment',
                 'options' => array(

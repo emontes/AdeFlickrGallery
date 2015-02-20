@@ -22,14 +22,24 @@ class AlbumService
                     } else {
                         $title = '';
                     }
-                    if (isset($result['details']['large'])){
+                    if (isset($result['details']['large'])) {
                         $largeImg = $result['details']['large']->uri;
                     } else {
-                        $largeImg = $result['details']['medium']->uri;
+                        if (isset($result['details']['medium'])) {
+                            $largeImg = $result['details']['medium']->uri;
+                        } else {
+                            $largeImg = $result['details']['original']->uri;
+                        }
+                        
+                    }
+                    if (isset($result['details']['medium']->uri)) {
+                        $mediumImg = $result['details']['medium']->uri;
+                    } else {
+                        $mediumImg = $result['details']['original']->uri;
                     }
                     $fotos[] = array(
                         'id'       => $result['id'],
-                        'uri'      => $result['details']['medium']->uri,
+                        'uri'      => $mediumImg,
                         'title'    => $title,
                         'largeImg' => $largeImg,
                     );
