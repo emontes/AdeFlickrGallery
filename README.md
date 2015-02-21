@@ -10,3 +10,5 @@ You can see a working demo in www.pueblapictures.com
 Install
 ------------
 
+With composer:
+require: "ade/flickr-gallery": "dev-master"
