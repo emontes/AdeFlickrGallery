@@ -1,5 +1,5 @@
 {
-  "name" : "AdeFlickrGallery",
+  "name" : "ade/flickr-gallery",
   "description" : "Flickr Photo Gallery in ZF2",
   "require" : {
     "php" : ">=5.3.3",

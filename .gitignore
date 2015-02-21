@@ -1,5 +1,6 @@
 # Composer files
 composer.phar
+composer.lock
 vendor/
 
 # Local configs
@@ -23,4 +24,4 @@ extras/documentation
 .buildpath
 .project
 .DS_Store
-/composer.lock
+
