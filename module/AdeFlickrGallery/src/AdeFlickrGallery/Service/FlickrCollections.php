@@ -11,7 +11,6 @@ use Zend\Dom\Query;
 use Zend\Dom\NodeList;
 
 
-use AdeFlickrGallery\Service\DOMNodeRecursiveIterator;
 
 class FlickrCollections extends FlickrPhoto
 {
