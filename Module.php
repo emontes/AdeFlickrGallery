@@ -1,12 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/AdeFlickrGallery for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace AdeFlickrGallery;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -59,8 +51,26 @@ class Module implements AutoloaderProviderInterface
         $flickr = new FlickrCollections($configFlickr['key']);
         $flickr->getHttpClient()->setOptions(array('sslverifypeer' => false));
         $collectionsService = new ColeccionesService();
-        $menu = $collectionsService->getCollectionTreeMenu(
-            $flickr, $configFlickr['user_id'], $configFlickr['collections']['puebla']);
+        $collections = $configFlickr['collections'];
+        $cuantas = count($collections);
+        if ($cuantas > 1) {
+            $menu = array(
+                'label' => 'Colecciones',
+                'uri'   => '#',
+            );
+        }
+        
+        foreach ($collections as $collection) {
+            if ($cuantas > 1) {
+                $menu['pages'][] = $collectionsService->getCollectionTreeMenu(
+                    $flickr, $configFlickr['user_id'], $collection);
+            } else {
+                $menu = $collectionsService->getCollectionTreeMenu(
+                    $flickr, $configFlickr['user_id'], $collection);
+            }
+            
+        }
+        
         $layoutView->setVariable('menuCollections', $menu);
     }
 }
