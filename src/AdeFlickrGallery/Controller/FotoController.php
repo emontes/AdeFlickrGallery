@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * AdeFlickrGallery
  *
- * @link      http://github.com/zendframework/Foto for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @link      https://github.com/emontes/AdeFlickrGallery
  */
 
 namespace AdeFlickrGallery\Controller;
@@ -26,7 +24,7 @@ class FotoController extends AbstractActionController
         $albumId = $this->params()->fromRoute('album');
         $page = $this->params()->fromRoute('page');
         
-        $config = $this->getServiceLocator()->get('config');
+        $config       = $this->getServiceLocator()->get('config');
         $configFlickr = $config['flickr'];
         
         $flickr = new FlickrPhoto($configFlickr['key']);
@@ -55,7 +53,8 @@ class FotoController extends AbstractActionController
             if (isset($page)) {
                 $album['link'] .= '/pag/' .$page;
             }
-            $retval['album'] = $album;
+            $retval['album']       = $album;
+            
         }
         
         
@@ -77,7 +76,7 @@ class FotoController extends AbstractActionController
         }
         
         $retval['photos'] = $photos;
-        
+        $retval['allowedTags'] = $configFlickr['allowedTags'];
         return $retval;
     }
 

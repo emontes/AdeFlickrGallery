@@ -104,7 +104,11 @@
                 <li class="ef-taghead">Etiquetado:</li>
                 <?php foreach ($tags as $tag):?>
                     <?php if ($tag <> ''):?>
+                    	<?php if (in_array($tag, $this->allowedTags)):?>
                         <li><a rel="tag" href="/tag/<?php echo $tag?>"><?php echo $tag?></a></li>
+                        <?php else:?>
+                        <li><button disabled="disabled"><?php echo $tag?></button></li>
+                        <?php endif;?>
                     <?php endif;?>
                 <?php endforeach;?>
               </ul>
