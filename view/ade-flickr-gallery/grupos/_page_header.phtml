@@ -79,7 +79,7 @@
                       <?php foreach ($this->tags as $tag=>$count):?>
                         <?php if ($tag <> ''):?>
                          <?php if (in_array($tag, $this->allowedTags)):?>
-                           <li><a class="tag-link" title="1 topic" href="/tag/<?php echo $tag?>"><?php echo $tag?></a></li>
+                           <li><a class="tag-link" title="Etiqueta <?php echo $tag?>" href="/tag/<?php echo $tag?>"><?php echo $tag?></a></li>
                          <?php else:?>
                            <li><button disabled="disabled"><?php echo $tag?></button></li>
                          <?php endif;?>

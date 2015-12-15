@@ -64,6 +64,7 @@ class TagController extends AbstractActionController
             'tags'              => $tags,
             'categorias'        => $categorias,
             'fotosConCategoria' => $fotosConCAtegoria,
+            'allowedTags'       => $configFlickr['allowedTags'],
         );
     }
 }
