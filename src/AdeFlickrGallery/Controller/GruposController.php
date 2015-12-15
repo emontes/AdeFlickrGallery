@@ -61,6 +61,7 @@ class GruposController extends AbstractActionController
             'tags'              => $tags,
             'categorias'        => $categorias,
             'fotosConCategoria' => $fotosConCategoria,
+            'allowedTags'       => $configFlickr['allowedTags'],
         );
     }
 
