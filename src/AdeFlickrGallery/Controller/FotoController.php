@@ -65,6 +65,14 @@ class FotoController extends AbstractActionController
         
         
         $idarray = explode('+', $id);
+        $notAllowedPictures = $configFlickr['notAllowedPictures'];
+        foreach ($notAllowedPictures as $naPicture) {
+            if (in_array($naPicture, $idarray)) {
+                $this->flashmessenger()->addErrorMessage('No estamos autorizados para desplegar la imagen' . $naPicture);
+                $this->redirect()->toRoute('home');
+            }
+        }
+        
         $photos = array();
         foreach ($idarray as $id) {
             $photos[] = array(
