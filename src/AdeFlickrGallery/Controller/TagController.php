@@ -21,6 +21,12 @@ class TagController extends AbstractActionController
             $this->redirect()->toRoute('home');
         }
         
+        $allowedTags = $configFlickr['allowedTags'];
+        if (!in_array($tag, $allowedTags)) {
+            $this->flashmessenger()->addErrorMessage('No estamos autorizados para desplegar el tag' . $tag);
+            $this->redirect()->toRoute('home');
+        }
+        
         $page = (int) $this->params()->fromRoute('page');
         if (!$page) {
             $page = 1;
